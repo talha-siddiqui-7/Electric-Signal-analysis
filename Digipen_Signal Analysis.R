@@ -4,6 +4,7 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 library(lubridate)
+library(stringr)
 
 # Define the full file path
 full_file_path <- "G:/.shortcut-targets-by-id/1Hqecl4V9odrCM-fZun8l-1cDSCip00KD/ATELIER_Actividad_Tecnica/WP9/Info_IBERDROLA/FTP/atelier_digipen/Data from 2024 until May 16/combined_data_digipen.csv"
@@ -34,7 +35,7 @@ avg_data_long <- avg_data %>%
 create_box_plot <- function(data, title) {
   ggplot(data, aes(x = kW_type, y = kW_value, fill = kW_type)) +
     geom_boxplot() +
-    labs(title = title,
+    labs(title = str_wrap(title, width = 20),
          x = "Power Type",
          y = "Power (kW)") +
     scale_fill_manual(values = c("blue", "green", "red")) +
@@ -78,7 +79,7 @@ summary_hour <- bind_rows(lapply(categories, process_and_summarize_by_hour, data
 create_day_plot <- function(data, title) {
   ggplot(data, aes(x = DayOfWeek, y = Power, color = Phase, group = Phase)) +
     geom_line() +
-    labs(title = title,
+    labs(title = str_wrap(title, width = 30),
          x = "Day of the Week",
          y = "Average Power (kW)") +
     scale_color_manual(values = c("blue", "green", "red")) +
@@ -91,7 +92,7 @@ create_hourly_plot <- function(data, title) {
   ggplot(data, aes(x = HourOfDay, y = Power, color = WeekdayType, shape = Phase)) +
     geom_line() +
     geom_point() +
-    labs(title = title,
+    labs(title = str_wrap(title, width = 30),
          x = "Hour of the Day",
          y = "Average Power (kW)",
          color = "Day Type",
@@ -103,12 +104,12 @@ create_hourly_plot <- function(data, title) {
 
 # Create and display plots for each category by day of the week
 for (category in categories) {
-  print(create_day_plot(filter(summary_day, Category == category), paste("Average Power by Day of the Week (", category, " Data)", sep = "")))
+  print(create_day_plot(filter(summary_day, Category == category), paste("Average Power by Day of the Week\n(", category, " Data)", sep = "")))
 }
 
 # Create and display plots for each category by hour of the day
 for (category in categories) {
-  print(create_hourly_plot(filter(summary_hour, Category == category), paste("Average Power by Hour of the Day (", category, " Data)", sep = "")))
+  print(create_hourly_plot(filter(summary_hour, Category == category), paste("Average Power by Hour of the Day\n(", category, " Data)", sep = "")))
 }
 
 # Combined active power plot for all locations in the building by day of the week
@@ -119,7 +120,7 @@ combined_summary_day <- avg_data %>%
 
 combined_plot <- ggplot(combined_summary_day, aes(x = DayOfWeek, y = AvgTotalPower, color = Category, group = Category)) +
   geom_line() +
-  labs(title = "Average Total Power by Day of the Week",
+  labs(title = str_wrap("Average Total Power by Day of the Week", width = 30),
        x = "Day of the Week",
        y = "Average Total Power (kW)") +
   scale_color_manual(values = c("blue", "green", "red", "purple", "orange")) +

@@ -3,7 +3,7 @@ library(readr)
 library(dplyr)
 
 # Define the directory containing the CSV files
-directory_path <- "G:/.shortcut-targets-by-id/1Hqecl4V9odrCM-fZun8l-1cDSCip00KD/ATELIER_Actividad_Tecnica/WP9/Info_IBERDROLA/FTP/mondragon/Data from 2024 until May 16"
+directory_path <- "G:/.shortcut-targets-by-id/1Hqecl4V9odrCM-fZun8l-1cDSCip00KD/ATELIER_Actividad_Tecnica/WP9/Info_IBERDROLA/FTP/mondragon/Data from 2024 until May 16/Electric signals"
 
 # List all CSV files in the directory
 file_list <- list.files(path = directory_path, pattern = "*.csv", full.names = TRUE)
@@ -46,4 +46,3 @@ output_file_path <- "G:/.shortcut-targets-by-id/1Hqecl4V9odrCM-fZun8l-1cDSCip00K
 
 # Write the combined data to a new CSV file
 write_csv(combined_data, output_file_path)
-
