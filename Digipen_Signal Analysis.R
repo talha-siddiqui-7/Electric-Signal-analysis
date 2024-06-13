@@ -6,7 +6,7 @@ library(tidyr)
 library(lubridate)
 
 # Define the full file path
-full_file_path <- "G:/.shortcut-targets-by-id/1Hqecl4V9odrCM-fZun8l-1cDSCip00KD/ATELIER_Actividad_Tecnica/WP9/Info_IBERDROLA/FTP/atelier_digipen/Data from 2024 until May 16/combined_data.csv"
+full_file_path <- "G:/.shortcut-targets-by-id/1Hqecl4V9odrCM-fZun8l-1cDSCip00KD/ATELIER_Actividad_Tecnica/WP9/Info_IBERDROLA/FTP/atelier_digipen/Data from 2024 until May 16/combined_data_digipen.csv"
 
 # Read the combined CSV file using read.csv
 combined_data <- read.csv(full_file_path, stringsAsFactors = FALSE)
